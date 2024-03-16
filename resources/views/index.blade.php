@@ -18,7 +18,7 @@
 						<div>
 							<label class="tx-13">Customer Ratings</label>
 							<div class="main-star">
-								<i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star"></i> <span>(14,873)</span>
+								<i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> <i class="typcn typcn-star active"></i> </span> <span>(14,873)</span>
 							</div>
 						</div>
 						<div>
@@ -459,5 +459,5 @@
 <script src="{{URL::asset('assets/js/modal-popup.js')}}"></script>
 <!--Internal  index js -->
 <script src="{{URL::asset('assets/js/index.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.vmap.sampledata.js')}}"></script>	
+<script src="{{URL::asset('assets/js/jquery.vmap.sampledata.js')}}"></script>
 @endsection
