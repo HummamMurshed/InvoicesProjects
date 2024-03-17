@@ -19,7 +19,8 @@ class SectionsController extends Controller
     public function index()
     {
         //
-        return view('sections.sections');
+        $setions = Sections::all();
+        return view('sections.sections')->with("sections", $setions);
     }
     private function isSectionFound($name)
     {

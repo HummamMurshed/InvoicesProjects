@@ -65,18 +65,15 @@
                             </tr>
                             </thead>
                             <tbody>
+                        <?php $i = 0; ?>
+                        @foreach($sections as $section)
+                                <?php $i++ ?>
                             <tr>
-                                <td>1</td>
-                                <td>بنك الراجحي</td>
-                                <td>غير مدفوعة</td>
-                                <td>لم يتم السداد</td>
+                                    <td>{{ $i }}</td>
+                                    <td>{{$section->section_name}}</td>
+                                    <td>{{$section->description}}</td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>بنك الراجحي</td>
-                                <td>غير مدفوعة</td>
-                                <td>لم يتم السداد</td>
-                            </tr>
+                        @endforeach
 
                             </tbody>
                         </table>
@@ -93,7 +90,7 @@
     </div>
 
     <!-- Basic modal -->
-    <<div class="modal" id="modaldemo8">
+    <div class="modal" id="modaldemo8">
         <div class="modal-dialog" role="document">
             <div class="modal-content modal-content-demo">
                 <div class="modal-header">
@@ -127,10 +124,7 @@
     <!-- End Basic modal -->
     <!-- row closed -->
 
-    </div>
-    <!-- Container closed -->
-    </div>
-    <!-- main-content closed -->
+
 @endsection
 @section('js')
     <!-- Internal Data tables -->
