@@ -132,8 +132,11 @@ class SectionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Sections $sections)
+    public function destroy(Request $request)
     {
         //
+        Sections::find($request->id)->delete();
+        $this->saveMeassgToSession('update', 'تم حذف القسم بنجاح');
+        return redirect($this->toThisPage());
     }
 }

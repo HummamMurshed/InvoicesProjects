@@ -64,7 +64,7 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="col-sm-6 col-md-4 col-xl-3">
-                        <a class="modal-effect btn btn-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">إضافة قسم</a>
+                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">إضافة قسم</a>
                     </div>
 
                 </div>
@@ -179,6 +179,33 @@
         </div>
         <!-- End EDit  modal -->
 
+        <!-- delete -->
+        <div class="modal" id="modaldemo9">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content modal-content-demo">
+                    <div class="modal-header">
+                        <h6 class="modal-title">حذف القسم</h6><button aria-label="Close" class="close" data-dismiss="modal"
+                                                                      type="button"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <form action="sections/destroy" method="post">
+                        {{method_field('delete')}}
+                        {{csrf_field()}}
+                        <div class="modal-body">
+                            <p>هل انت متاكد من عملية الحذف ؟</p><br>
+                            <input type="hidden" name="id" id="id" value="">
+                            <input class="form-control" name="section_name" id="section_name" type="text" readonly>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">الغاء</button>
+                            <button type="submit" class="btn btn-danger">تاكيد</button>
+                        </div>
+
+                      </form>
+             </div>
+            </div>
+        </div>
+        <!-- End Delete -->
+
     </div>
 
     <!-- main-content closed -->
@@ -219,9 +246,20 @@
             modal.find('.modal-body #description').val(description);
         })
     </script>
-
-
     <!--End EDit script -->
+    <!--Start Delete script -->
+    <script>
+        $('#modaldemo9').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var id = button.data('id')
+            var section_name = button.data('section_name')
+            var modal = $(this)
+            modal.find('.modal-body #id').val(id);
+            modal.find('.modal-body #section_name').val(section_name);
+        })
+    </script>
+    <!--End Delete script -->
+
 
 @endsection
 
