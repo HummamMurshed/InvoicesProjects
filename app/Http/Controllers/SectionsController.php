@@ -72,7 +72,7 @@ class SectionsController extends Controller
                 "created_by"  => Auth::user()->name,
 
             ]);
-            $this->saveMeassgToSession('Add', 'تم إضافة القسم بنجاح');
+            $this->saveMeassgToSession('success', 'تم إضافة القسم بنجاح');
             return redirect($this->toThisPage());
 
 
@@ -123,7 +123,7 @@ class SectionsController extends Controller
             "description" => $request->description,
 
         ]);
-        $this->saveMeassgToSession('update', 'تم تعديل القسم بنجاح');
+        $this->saveMeassgToSession('success', 'تم تعديل القسم بنجاح');
         return redirect($this->toThisPage());
 
 
@@ -136,7 +136,7 @@ class SectionsController extends Controller
     {
         //
         Sections::find($request->id)->delete();
-        $this->saveMeassgToSession('update', 'تم حذف القسم بنجاح');
+        $this->saveMeassgToSession('success', 'تم حذف القسم بنجاح');
         return redirect($this->toThisPage());
     }
 }
