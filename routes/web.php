@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InvoicesController;
+use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
 use Illuminate\Support\Facades\Route;
@@ -32,5 +33,11 @@ Route::resource('/sections', SectionsController::class);
 Route::resource('/products', ProductsController::class);
 
 Route::get('getProducts/{id}',[InvoicesController::class,"getProducts"]);
+Route::get('InvoicesDetails/{id}', [InvoicesDetailsController::class,"edit"]);
 
+
+Route::get('download/{invoices_number}/{file_name}',[InvoicesDetailsController::class,"getFile"]);
+Route::get('View_file/{invoices_number}/{file_name}',[InvoicesDetailsController::class,"openFile"]);
+
+Route::post('delete_file', [InvoicesDetailsController::class,"destroy"])->name('delete_file');
 Route::get('/{page}', AdminController::class. '@index');

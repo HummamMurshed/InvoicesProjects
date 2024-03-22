@@ -7,6 +7,7 @@ use App\Models\Invoices;
 use App\Models\Invoices_details;
 use App\Models\Sections;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Attachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -77,7 +78,7 @@ class InvoicesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Invoices $invoices)
+    public function edit($id)
     {
         //
     }
@@ -99,7 +100,9 @@ class InvoicesController extends Controller
     }
     public  function getProducts($id)
     {
+
         $products = DB::table('products')->where('section_ID',$id)->pluck('name','id');
+
         return json_encode($products);
     }
 
@@ -163,5 +166,11 @@ class InvoicesController extends Controller
                 "invoice_number.max" => 'يرجى إدحال عدد أحرف أقل من 255 حرف في حقل رقم الفاتورة ',
             ]
         );
+    }
+
+    public function getInvoicesDetailes($id)
+    {
+        $InvoDetailes = table('invoices_details')->where("invoice_ID" , $id)->limit(5);
+        return view('invoices/invoices_details');
     }
 }
