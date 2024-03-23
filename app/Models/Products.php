@@ -9,7 +9,6 @@ class Products extends Model
 {
     public function section()
     {
-
         return  $this->belongsTo( Sections::class,"section_ID");
     }
     use HasFactory;

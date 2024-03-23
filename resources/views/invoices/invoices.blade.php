@@ -144,18 +144,22 @@
                                             <div class="dropdown-menu tx-13">
                                                 {{-- ('تعديل الفاتورة')--}}
                                                     <a class="dropdown-item"
-                                                       href=" {{ url('edit_invoice') }}/{{ $invoice->id }}">تعديل
+                                                       href=" {{ url('edit_invoice') }}/{{ $invoice->id }}">
+                                                        <i class="text-danger fas fa-pencil-alt "></i>
+
+                                                        تعديل
+                                                        الفاتورة
+
+                                                    </a>
+
+                                                 {{--  ('حذف الفاتورة')--}}
+
+                                                    <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
+                                                       data-toggle="modal" data-target="#delete_invoice">
+                                                        <i class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
                                                         الفاتورة</a>
                                             </div>
                                         </div>
-
-                                                @can('حذف الفاتورة')
-                                                    <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
-                                                       data-toggle="modal" data-target="#delete_invoice"><i
-                                                            class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
-                                                        الفاتورة</a>
-                                                @endcan
-
                                                 @can('تغير حالة الدفع')
                                                     <a class="dropdown-item"
                                                        href="{{ URL::route('Status_show', [$invoice->id]) }}"><i
@@ -282,6 +286,7 @@
     <script src="{{ URL::asset('assets/plugins/notify/js/notifIt.js') }}"></script>
     <script src="{{ URL::asset('assets/plugins/notify/js/notifit-custom.js') }}"></script>
 
+    <!-- soft Delete Invoice-->
     <script>
         $('#delete_invoice').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget)

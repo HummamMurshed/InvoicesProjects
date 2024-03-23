@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Mail\Attachment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class InvoicesController extends Controller
 {
@@ -120,9 +121,16 @@ class InvoicesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoices $invoices)
+    public function destroy(Request $request)
     {
         //
+       $invoice = Invoices::where('id',$request->invoice_id )->first();
+
+       $this->deleteInvoiceAttachments($request->invoice_id);
+       $invoice->delete();
+       $this->saveMeassgToSession('success', 'تم حذف الفاتورة بنجاح');
+       return redirect($this->toThisPage());
+
     }
     public  function getProducts($id)
     {
@@ -198,5 +206,16 @@ class InvoicesController extends Controller
     {
         $InvoDetailes = table('invoices_details')->where("invoice_ID" , $id)->limit(5);
         return view('invoices/invoices_details');
+    }
+
+    private function deleteInvoiceAttachments($id)
+    {
+        $invoice_Attatchments = Invoice_attachments::where('invoices_ID', $id )->get();
+
+        if(!empty( $invoice_Attatchments))
+        {
+            foreach ($invoice_Attatchments as $invoice_Attatchment )
+            Storage::disk('public_uploads')->delete($invoice_Attatchment->invoice_number . '/' . $invoice_Attatchment->file_name);
+        }
     }
 }
