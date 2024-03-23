@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvoiceAttchmentsController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,9 +37,11 @@ Route::resource('/products', ProductsController::class);
 Route::get('getProducts/{id}',[InvoicesController::class,"getProducts"]);
 Route::get('InvoicesDetails/{id}', [InvoicesDetailsController::class,"edit"]);
 
+Route::resource('InvoiceAttachments', InvoiceAttchmentsController::class);
 
 Route::get('download/{invoices_number}/{file_name}',[InvoicesDetailsController::class,"getFile"]);
 Route::get('View_file/{invoices_number}/{file_name}',[InvoicesDetailsController::class,"openFile"]);
 
+Route::get('edit_invoice/{id}', [InvoicesController::class,"edit"]);
 Route::post('delete_file', [InvoicesDetailsController::class,"destroy"])->name('delete_file');
 Route::get('/{page}', AdminController::class. '@index');

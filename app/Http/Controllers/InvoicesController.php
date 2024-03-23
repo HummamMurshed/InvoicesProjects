@@ -81,14 +81,40 @@ class InvoicesController extends Controller
     public function edit($id)
     {
         //
+        $invoices = Invoices::where('id', $id)->first();
+
+        $sections  = Sections::all();
+
+        return view('invoices/invoices_edit', compact('sections'))->with("invoices",$invoices);
+
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Invoices $invoices)
+    public function update(Request $request)
     {
         //
+        $invoice = Invoices::findOrFail($request->invoice_id);
+        $invoice->update([
+            "invoice_number" => $request->invoice_number,
+            "inovices_date" => $request->invoice_Date,
+            "due_date" => $request->Due_date,
+            "product" => $request->product,
+            "section_ID" => $request->Section,
+            "Amount_collection" => $request->Amount_collection,
+            "Amount_Commission" => $request->Amount_Commission,
+            "discount" => $request->Discount,
+            "total" => $request->Total,
+            "value_vat" => $request->Value_VAT,
+            "rate_vat" => $request->Rate_VAT,
+            "status" => 'غير مدفوعة',
+            "value_status" => 2,
+            "note" => $request->note,
+        ]);
+        $this->saveMeassgToSession('success', 'تم تعديل الفاتورة بنجاح');
+        return redirect($this->toThisPage());
     }
 
     /**

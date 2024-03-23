@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice_attachments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class InvoiceAttchmentsController extends Controller
 {
@@ -29,6 +30,28 @@ class InvoiceAttchmentsController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validate($request,[
+            "file_name" => "mimes:pdf,jpeg,png,jpg"
+        ],[
+            "file_name.mimes" => "صيغة المرفق يجب أن تكون pdf,jpeg,png,jpg"
+        ]);
+
+        $image = $request->file('file_name');
+        $file_name = $image->getClientOriginalName();
+
+        $attachment = new Invoice_attachments();
+        $attachment->file_name = $file_name;
+        $attachment->invoices_ID = $request->invoice_id;
+        $attachment->invoice_number = $request->invoice_number;
+
+        $attachment->Created_by = Auth::user()->name;
+        $attachment->save();
+
+        $imageName = $request->file_name->getClientOriginalName();
+        $request->file_name->move(public_path('Attachments/'. $request->invoice_number), $imageName);
+        session()->flash('success', 'تم إضافة المرفق بنجاح');
+        return back();
+
     }
 
     /**
@@ -61,5 +84,10 @@ class InvoiceAttchmentsController extends Controller
     public function destroy(Invoice_attachments $invoice_attchments)
     {
         //
+    }
+    private function saveMeassgToSession($type, $message)
+    {
+        session()->flash($type,$message);
+
     }
 }
