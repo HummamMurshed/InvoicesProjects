@@ -11,7 +11,7 @@ class ProductsController extends Controller
     private function validProduct(Request $request)
     {
         $validate = $request->validate([
-            "name" => "required|unique:products|max:255",
+            "name" => "required:products|max:255",
             "section_ID" => "required"
         ],[
             "name.required"  => 'يرجى إدحال اسم القسم',

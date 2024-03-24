@@ -175,7 +175,7 @@
                                                                 </td>
                                                             @else
                                                                 <td><span
-                                                                        class="badge badge-pill badge-warning">{{ $x->status }}</span>
+                                                                        class="badge badge-pill badge-warning">{{ $x->statuse }}</span>
                                                                 </td>
                                                             @endif
                                                             <td>{{ $x->Payment_Date }}</td>

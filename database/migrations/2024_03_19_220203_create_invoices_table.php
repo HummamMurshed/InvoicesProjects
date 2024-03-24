@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("invoice_number");
+            $table->string("invoice_number",50);
             $table->date("inovices_date");
             $table->date("due_date");
             $table->string("product");
@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string("status",50);
             $table->integer("value_status");
             $table->text("note")->nullable();
-
             $table->date('Payment_Date')->nullable();
             $table->softDeletes();
             $table->timestamps();

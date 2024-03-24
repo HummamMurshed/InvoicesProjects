@@ -17,10 +17,15 @@ class InvoicesController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->saveMeassgToSession('NULL',"");
+    }
     public function index()
     {
         //
         $invoices = Invoices::all();
+
         return view('invoices.invoices', compact('invoices'));
     }
 
@@ -30,6 +35,7 @@ class InvoicesController extends Controller
     public function create()
     {
         //
+
         $sections = Sections::all();
         return view('invoices/add_invoices', compact('sections'));
     }
@@ -71,9 +77,60 @@ class InvoicesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoices $invoices)
+    public function show($id)
     {
         //
+        $invoices = Invoices::where('id', $id)->first();
+        return view('invoices.status_update', compact('invoices'));
+    }
+    public function status_update(Request $request,$id)
+    {
+
+        $invoices =  Invoices::findOrfail($request->id);
+
+        if ($request->Status === 'مدفوعة') {
+
+            $invoices->update([
+                'value_status' => 1,
+                'statuse' => $request->Status,
+                'Payment_Date' => $request->Payment_Date,
+            ]);
+
+            invoices_Details::create([
+                'invoice_ID' => $request->invoice_id,
+                'invoice_number' => $request->invoice_number,
+                'product' => $request->product,
+                'section' => $request->Section,
+                'statuse' => $request->Status,
+                'value_status' => 1,
+                'note' => $request->note,
+                'Payment_Date' => $request->Payment_Date,
+                'user' => (Auth::user()->name),
+            ]);
+        }
+
+        else {
+            $invoices->update([
+                'value_status' => 3,
+                'statuse' => $request->Status,
+                'Payment_Date' => $request->Payment_Date,
+            ]);
+            invoices_Details::create([
+                'invoice_ID' => $request->invoice_id,
+                'invoice_number' => $request->invoice_number,
+                'product' => $request->product,
+                'section' => $request->Section,
+                'statuse' => $request->Status,
+                'value_status' => 3,
+                'note' => $request->note,
+                'Payment_Date' => $request->Payment_Date,
+                'user' => (Auth::user()->name),
+            ]);
+        }
+
+
+        $this->saveMeassgToSession('success', 'تم تعديب حالة الدفع بنجاح');
+        return redirect($this->toThisPage());
     }
 
     /**
