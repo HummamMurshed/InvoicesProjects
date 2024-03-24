@@ -49,4 +49,8 @@ Route::post('Status_Update/{id}', [InvoicesController::class, 'status_update'])-
 Route::get('edit_invoice/{id}', [InvoicesController::class,"edit"]);
 Route::post('delete_file', [InvoicesDetailsController::class,"destroy"])->name('delete_file');
 
+Route::get('invoices_paid', [InvoicesController::class,"invoicesPaid"]);
+Route::get('invoices_unpaid', [InvoicesController::class,"invoicesUnpaid"]);
+Route::get('invoices_partialPaid', [InvoicesController::class,"invoicesPartialPaid"]);
+
 Route::get('/{page}', AdminController::class. '@index');

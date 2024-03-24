@@ -92,7 +92,7 @@ class InvoicesController extends Controller
 
             $invoices->update([
                 'value_status' => 1,
-                'statuse' => $request->Status,
+                'status' => $request->Status,
                 'Payment_Date' => $request->Payment_Date,
             ]);
 
@@ -112,7 +112,7 @@ class InvoicesController extends Controller
         else {
             $invoices->update([
                 'value_status' => 3,
-                'statuse' => $request->Status,
+                'status' => $request->Status,
                 'Payment_Date' => $request->Payment_Date,
             ]);
             invoices_Details::create([
@@ -129,7 +129,7 @@ class InvoicesController extends Controller
         }
 
 
-        $this->saveMeassgToSession('success', 'تم تعديب حالة الدفع بنجاح');
+        $this->saveMeassgToSession('success', 'تم تعديل حالة الدفع بنجاح');
         return redirect($this->toThisPage());
     }
 
@@ -188,6 +188,22 @@ class InvoicesController extends Controller
        $this->saveMeassgToSession('success', 'تم حذف الفاتورة بنجاح');
        return redirect($this->toThisPage());
 
+    }
+    public function invoicesPaid()
+    {
+        $invoices =  Invoices::where('value_status', 1)->get();
+        return view('invoices.invoices_paid', compact('invoices'));
+    }
+    public function invoicesUnpaid()
+    {
+        $invoices = Invoices::where('value_status',2)->get();
+        return view('invoices.invoices_unpaid', compact('invoices'));
+
+    }
+    public function invoicesPartialPaid()
+    {
+        $invoices = Invoices::where('value_status', 3)->get();
+        return view('invoices.invoices_parial_paid', compact('invoices'));
     }
     public  function getProducts($id)
     {

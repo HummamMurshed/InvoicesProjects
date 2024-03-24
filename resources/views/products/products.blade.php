@@ -56,7 +56,9 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="col-sm-6 col-md-4 col-xl-3">
-                        <a class="modal-effect btn btn-outline-primary btn-block" data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">إضافة منتج</a>
+                        <a class="modal-effect btn btn-outline-primary btn-block"
+                           data-effect="effect-scale" data-toggle="modal" href="#modaldemo8">
+                            <i class="fas fa-plus ml-1"></i>         إضافة منتج  </a>
                     </div>
 
                 </div>
