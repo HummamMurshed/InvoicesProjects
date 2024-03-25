@@ -209,6 +209,11 @@ class InvoicesController extends Controller
 
 
     }
+    public function Print_invoice($id)
+    {
+        $invoices =  Invoices::where('id',  $id)->first();
+        return view('invoices.Print_invoice', compact('invoices'));
+    }
 
     public function invoicesPaid()
     {
