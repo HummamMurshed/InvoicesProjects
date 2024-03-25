@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\InvoiceAttchmentsController;
+use App\Http\Controllers\InvoicesArchiveController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
@@ -52,5 +53,7 @@ Route::post('delete_file', [InvoicesDetailsController::class,"destroy"])->name('
 Route::get('invoices_paid', [InvoicesController::class,"invoicesPaid"]);
 Route::get('invoices_unpaid', [InvoicesController::class,"invoicesUnpaid"]);
 Route::get('invoices_partialPaid', [InvoicesController::class,"invoicesPartialPaid"]);
+
+Route::resource('invoices_archive',InvoicesArchiveController::class);
 
 Route::get('/{page}', AdminController::class. '@index');

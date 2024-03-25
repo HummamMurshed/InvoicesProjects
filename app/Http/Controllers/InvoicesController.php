@@ -182,13 +182,34 @@ class InvoicesController extends Controller
     {
         //
        $invoice = Invoices::where('id',$request->invoice_id )->first();
+        $invoice_Attatchments = Invoice_attachments::where('invoices_ID', $request->invoice_id )->first();
 
-       $this->deleteInvoiceAttachments($request->invoice_id);
-       $invoice->delete();
-       $this->saveMeassgToSession('success', 'تم حذف الفاتورة بنجاح');
-       return redirect($this->toThisPage());
+       if($request->id_page == 2)
+       {
+
+           if(!empty($invoice_Attatchments->invoice_number))
+           {
+               $this->deleteInvoiceAttachments($request->invoice_id);
+               //Delete Directory
+               Storage::disk('public_uploads')->deleteDirectory($invoice_Attatchments->invoice_number);
+           }
+
+           $invoice->forceDelete();
+           $this->saveMeassgToSession('success', 'تم حذف الفاتورة بنجاح');
+           return redirect($this->toThisPage());
+
+       }
+       else
+       {
+           $invoice->delete();
+           $this->saveMeassgToSession('success', 'تم أرشفة الفاتورة بنجاح');
+           return redirect('invoices_archive');
+       }
+
+
 
     }
+
     public function invoicesPaid()
     {
         $invoices =  Invoices::where('value_status', 1)->get();
