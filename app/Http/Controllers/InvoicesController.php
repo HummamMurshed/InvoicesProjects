@@ -2,15 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvoicesExport;
+
 use App\Models\Invoice_attachments;
 use App\Models\Invoices;
 use App\Models\Invoices_details;
 use App\Models\Sections;
+use App\Models\User;
+use App\Notifications\AddInvoice;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Attachment;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Notification;
+use function Symfony\Component\String\b;
 
 class InvoicesController extends Controller
 {
@@ -71,6 +78,9 @@ class InvoicesController extends Controller
 
 
         $this->saveMeassgToSession('success', 'تم إضافة الفاتورة بنجاح');
+        $user =  User::first();
+//        $user->notify(new AddInvoice(invoices::latest()->first()->id));
+//        Notification::send($user,new AddInvoice(invoices::latest()->first()->id) );
         return redirect($this->toThisPage());
     }
 
@@ -265,8 +275,14 @@ class InvoicesController extends Controller
     }
     private function saveImageToPupblicFolder($request)
     {
-        $imageName = $request->pic->getClientOriginalName();
-        $request->pic->move(public_path('Attachments/'. $request->invoice_number), $imageName);
+        $invoice_Attatchments = Invoice_attachments::where('invoices_ID', $request->invoice_id )->get();
+
+        if($request->hasFile('pic'))
+        {
+            $imageName = $request->pic->getClientOriginalName();
+            $request->pic->move(public_path('Attachments/'. $request->invoice_number), $imageName);
+        }
+
     }
     private function saveInvoicesAttachment(Request  $request)
     {
@@ -316,5 +332,10 @@ class InvoicesController extends Controller
             foreach ($invoice_Attatchments as $invoice_Attatchment )
             Storage::disk('public_uploads')->delete($invoice_Attatchment->invoice_number . '/' . $invoice_Attatchment->file_name);
         }
+    }
+
+    public function export()
+    {
+        return \Excel::download(new InvoicesExport, 'Invoices.xlsx');
     }
 }
