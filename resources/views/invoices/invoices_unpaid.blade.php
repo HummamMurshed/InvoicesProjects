@@ -74,10 +74,11 @@
                 <div class="card-header pb-0">
 
                     <div class="col-sm-6 col-md-4 col-xl-3">
-                        <a href="invoices/create" class="modal-effect btn  btn-outline-primary " >
+
+                        <a href="invoices/create" class="modal-effect btn btn-sm btn-outline-primary" >
                             <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
-                        {{--    ('تصدير EXCEL')--}}
-                        <a class="modal-effect btn  btn-outline-primary " href="{{ url('export_invoices') }}"
+                        {{--     ('تصدير EXCEL')--}}
+                        <a  class="modal-effect btn btn-sm btn-outline-primary  " href="{{ url('export_invoices') }}"
                         ><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
                     </div>
 
