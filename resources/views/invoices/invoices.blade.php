@@ -73,11 +73,15 @@
             <div class="card mg-b-20">
                 <div class="card-header pb-0">
                     <div class="col-sm-6 col-md-4 col-xl-3">
+                        @can('اضافة فاتورة')
                         <a href="invoices/create" class="modal-effect btn btn-sm btn-outline-primary" >
                             <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
-                        {{--     ('تصدير EXCEL')--}}
+
+                        @endcan
+                        @can('تصدير EXCEL')
                         <a  class="modal-effect btn btn-sm btn-outline-primary  " href="{{ url('export_invoices') }}"
                         ><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
+                        @endcan
                     </div>
 
 
@@ -155,35 +159,39 @@
 
                                                     </a>
 
-                                                 {{--  ('حذف الفاتورة')--}}
+                                                   @can('حذف الفاتورة')
 
                                                     <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
                                                        data-toggle="modal" data-target="#delete_invoice">
                                                         <i class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
                                                         الفاتورة</a>
-
-                                                {{--     ('تغير حالة الدفع')--}}
+                                                    @endcan
+                                                     @can('تغير حالة الدفع')
 
                                                 <a class="dropdown-item" href="{{URL::route('Status_show', ["id" => $invoice->id]) }}">
 
                                                     <i class=" text-success fas fa-money-bill"></i>&nbsp;&nbsp;تغير
                                                         حالة
-                                                        الدفع</a>
+                                                        الدفع
+                                                </a>
+                                                @endcan
 
 
-                                        {{--     ('ارشفة الفاتورة')--}}
+                                             @can('ارشفة الفاتورة')
 
-                                        <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
-                                                       data-toggle="modal" data-target="#Transfer_invoice"><i
-                                                            class="text-warning fas fa-exchange-alt"></i>&nbsp;&nbsp;نقل الى
-                                                        الارشيف</a>
+                                                <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
+                                                               data-toggle="modal" data-target="#Transfer_invoice"><i
+                                                                    class="text-warning fas fa-exchange-alt"></i>&nbsp;&nbsp;نقل الى
+                                                                الارشيف
+                                                </a>
+                                            @endcan
 
-
-                                        {{--         ('طباعةالفاتورة')--}}
+                                                 @can('طباعةالفاتورة')
                                                     <a class="dropdown-item" href="Print_invoice/{{ $invoice->id }}"><i
                                                             class="text-success fas fa-print"></i>&nbsp;&nbsp;طباعة
                                                         الفاتورة:{{ date('Y-m-d') }}
                                                     </a>
+                                                 @endcan
                                             </div>
 
 

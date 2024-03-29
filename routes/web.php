@@ -6,9 +6,11 @@ use App\Http\Controllers\InvoicesArchiveController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionsController;
 
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,4 +59,11 @@ Route::get('invoices_partialPaid', [InvoicesController::class,"invoicesPartialPa
 Route::resource('invoices_archive',InvoicesArchiveController::class);
 Route::get('Print_invoice/{id}',[InvoicesController::class, "Print_invoice"]);
 Route::get('export_invoices/', [InvoicesController::class, 'export']);
+
+// Route For Admin For Test Permissiion
+Route::group(['middleware' => ["auth","role:owner"]], function (){
+    Route::resource('users',UserController::class);
+    Route::resource('roles', RoleController::class);
+});
+
 Route::get('/{page}', AdminController::class. '@index');
