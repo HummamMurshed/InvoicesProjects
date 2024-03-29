@@ -26,6 +26,16 @@ class InvoicesController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('permission:قائمة الفواتير',['only' => ['index']]);
+        $this->middleware('permission:اضافة فاتورة',['only'=>['create','store']]);
+        $this->middleware('permission:تعديل الفاتورة',['only' => ['edit','update']]);
+        $this->middleware('permission:حذف الفاتورة', ['only' => ['destroy']]);
+        $this->middleware('permission:تغير حالة الدفع', ['only' => ['show','status_update']]);
+        $this->middleware('permission:طباعةالفاتورة', ['only' => ['Print_invoice']]);
+        $this->middleware('permission:الفواتير المدفوعة', ['only' => ['invoicesPaid']]);
+        $this->middleware('permission:الفواتير الغير مدفوعة', ['only' => ['invoicesUnpaid']]);
+        $this->middleware('permission:الفواتير المدفوعة جزئيا', ['only' => ['invoicesPartialPaid']]);
+
         $this->saveMeassgToSession('NULL',"");
     }
     public function index()

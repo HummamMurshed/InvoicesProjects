@@ -124,9 +124,14 @@
                                     <td>{{ $invoice->inovices_date }}</td>
                                     <td>{{ $invoice->due_date }}</td>
                                     <td>{{ $invoice->product }}</td>
-                                    <td><a
-                                            href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">{{ $invoice->section->section_name }}</a>
+
+                                    <td>
+                                        @can('الاقسام')
+                                        <a href="{{ url('InvoicesDetails') }}/{{ $invoice->id }}">
+                                            {{ $invoice->section->section_name }}</a>
+                                        @endcan
                                     </td>
+
                                     <td>{{ $invoice->discount }}</td>
                                     <td>{{ $invoice->rate_vat }}</td>
                                     <td>{{ $invoice->value_vat }}</td>
@@ -149,7 +154,7 @@
                                                     class="btn ripple btn-primary btn-sm" data-toggle="dropdown"
                                                     type="button">العمليات<i class="fas fa-caret-down ml-1"></i></button>
                                             <div class="dropdown-menu tx-13">
-                                                {{-- ('تعديل الفاتورة')--}}
+                                                @can('تعديل الفاتورة')
                                                     <a class="dropdown-item"
                                                        href=" {{ url('edit_invoice') }}/{{ $invoice->id }}">
                                                         <i class="text-info fas fa-pencil-alt "></i>
@@ -158,6 +163,7 @@
                                                         الفاتورة
 
                                                     </a>
+                                                @endcan
 
                                                    @can('حذف الفاتورة')
 

@@ -12,6 +12,11 @@ class InvoicesArchiveController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('permission:حذف الفاتورة', ['only' => ['destroy']]);
+        $this->middleware('permission:تعديل الفاتورة',['only' => ['edit','update']]);
+    }
     public function index()
     {
         //

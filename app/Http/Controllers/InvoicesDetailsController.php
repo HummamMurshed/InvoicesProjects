@@ -12,9 +12,16 @@ use Illuminate\Support\Facades\Storage;
 
 class InvoicesDetailsController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->middleware('permission:حذف المرفق', ['only' => ['destroy']]);
+        $this->middleware('permission:اضافة منتج',['only'=>['create','store']]);
+        $this->middleware('permission:تعديل منتج',['only' => ['edit','update']]);
+    }
     public function index()
     {
         //

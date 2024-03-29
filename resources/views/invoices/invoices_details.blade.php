@@ -203,6 +203,7 @@
                                                               enctype="multipart/form-data">
                                                             {{ csrf_field() }}
                                                             <div class="custom-file">
+                                                                @can('اضافة مرفق')
                                                                 <input type="file" class="custom-file-input" id="customFile"
                                                                        name="file_name" required>
                                                                 <input type="hidden" id="customFile" name="invoice_number"
@@ -211,9 +212,11 @@
                                                                        value="{{ $invoices->id }}">
                                                                 <label class="custom-file-label" for="customFile">حدد
                                                                     المرفق</label>
-                                                            </div><br><br>
+                                                            </div>
+                                                            <br><br>
                                                             <button type="submit" class="btn btn-primary btn-sm "
                                                                     name="uploadedFile">تاكيد</button>
+                                                            @endcan
                                                         </form>
                                                     </div>
 
@@ -251,16 +254,17 @@
                                                                        href="{{ url('download') }}/{{ $invoices->invoice_number }}/{{ $attachment->file_name }}"
                                                                        role="button"><i
                                                                             class="fas fa-download"></i>&nbsp;
-                                                                        تحميل</a>
+                                                                        تحميل
+                                                                    </a>
 
-
+                                                                    @can('حذف المرفق')
                                                                         <button class="btn btn-outline-danger btn-sm"
                                                                                 data-toggle="modal"
                                                                                 data-file_name="{{ $attachment->file_name }}"
                                                                                 data-invoice_number="{{ $attachment->invoice_number }}"
                                                                                 data-id_file="{{ $attachment->id }}"
                                                                                 data-target="#delete_file">حذف</button>
-
+                                                                    @endcan
 
                                                                 </td>
                                                             </tr>

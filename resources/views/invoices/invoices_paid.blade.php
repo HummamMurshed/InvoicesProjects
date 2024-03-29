@@ -74,15 +74,15 @@
                 <div class="card-header pb-0">
 
                     <div class="col-sm-6 col-md-4 col-xl-3">
+                        @can('اضافة فاتورة')
                         <a href="invoices/create" class="modal-effect btn btn-sm btn-outline-primary" >
                             <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
-                        {{--     ('تصدير EXCEL')--}}
+                        @endcan
+                             @can('تصدير EXCEL')
                         <a  class="modal-effect btn btn-sm btn-outline-primary  " href="{{ url('export_invoices') }}"
                         ><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
+                        @endcan
                     </div>
-
-
-
 
                 </div>
                 <div class="card-body">

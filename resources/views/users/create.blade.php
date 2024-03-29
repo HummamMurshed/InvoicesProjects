@@ -59,7 +59,7 @@
                                     <label>اسم المستخدم: <span class="tx-danger">*</span></label>
                                     <input class="form-control form-control-sm mg-b-20"
                                            data-parsley-class-handler="#lnWrapper" name="name"
-                                           required="" type="text">
+                                           required="" type="text" >
                                 </div>
 
                                 <div class="parsley-input col-md-6 mg-t-20 mg-md-t-0" id="lnWrapper">
