@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CustomerReportControoler;
 use App\Http\Controllers\InvoiceAttchmentsController;
 use App\Http\Controllers\InvoicesArchiveController;
 use App\Http\Controllers\InvoicesController;
 use App\Http\Controllers\InvoicesDetailsController;
+use App\Http\Controllers\InvoicesReportController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SectionsController;
@@ -65,5 +67,11 @@ Route::group(['middleware' => ["auth","role:owner"]], function (){
     Route::resource('users',UserController::class);
     Route::resource('roles', RoleController::class);
 });
+
+Route::get('invoices_report',[InvoicesReportController::class,"index"]);
+Route::post('Search_invoices',[InvoicesReportController::class,"Search_invoices"]);
+
+Route::get('customer_report',[CustomerReportControoler::class,"index"]);
+Route::post('Search_customers',[CustomerReportControoler::class,"Search_customers"]);
 
 Route::get('/{page}', AdminController::class. '@index');

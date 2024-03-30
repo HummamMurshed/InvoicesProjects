@@ -224,7 +224,7 @@
                 var SectionId = $(this).val();
                 if (SectionId) {
                     $.ajax({
-                        url: "{{ URL::to('section') }}/" + SectionId,
+                        url: "{{ URL::to('getProducts') }}/" + SectionId,
                         type: "GET",
                         dataType: "json",
                         success: function(data) {
