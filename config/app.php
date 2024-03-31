@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+ Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class;
 
 return [
 

@@ -116,7 +116,7 @@ class InvoicesController extends Controller
                 'Payment_Date' => $request->Payment_Date,
             ]);
 
-            invoices_Details::create([
+            Invoices_details::create([
                 'invoice_ID' => $request->invoice_id,
                 'invoice_number' => $request->invoice_number,
                 'product' => $request->product,
@@ -135,7 +135,7 @@ class InvoicesController extends Controller
                 'status' => $request->Status,
                 'Payment_Date' => $request->Payment_Date,
             ]);
-            invoices_Details::create([
+            Invoices_details::create([
                 'invoice_ID' => $request->invoice_id,
                 'invoice_number' => $request->invoice_number,
                 'product' => $request->product,
