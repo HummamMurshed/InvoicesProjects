@@ -78,8 +78,9 @@
                             <i class="fas fa-plus"></i>&nbsp; اضافة فاتورة</a>
                         @endcan
 
-                         @can('تصدير EXCEL')
-                        <a  class="modal-effect btn btn-sm btn-outline-primary  " href="{{ url('export_invoices') }}"
+                         @can('تصدير NULL')
+                        <a  class="modal-effect btn btn-sm btn-outline-primary
+                        " href="{{ url('export_invoices') }}"
                         ><i class="fas fa-file-download"></i>&nbsp;تصدير اكسيل</a>
                         @endcan
                     </div>

@@ -179,10 +179,10 @@ class InvoicesController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        // "invoice_number" => $request->invoice_number,
         $invoice = Invoices::findOrFail($request->invoice_id);
         $invoice->update([
-            "invoice_number" => $request->invoice_number,
+
             "inovices_date" => $request->invoice_Date,
             "due_date" => $request->Due_date,
             "product" => $request->product,
