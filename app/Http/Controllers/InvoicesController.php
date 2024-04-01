@@ -87,10 +87,16 @@ class InvoicesController extends Controller
         $this->saveImageToPupblicFolder($request);
 
 
-        $this->saveMeassgToSession('success', 'تم إضافة الفاتورة بنجاح');
-        $user =  User::first();
+        //Save Notifications To DataBase
+        $user = User::get();
+        $invoices = invoices::latest()->first();
+        Notification::send($user, new \App\Notifications\Add_invoice_new($invoices));
+
+//        event(new MyEventClass('hello world'));
+
 //        $user->notify(new AddInvoice(invoices::latest()->first()->id));
 //        Notification::send($user,new AddInvoice(invoices::latest()->first()->id) );
+        $this->saveMeassgToSession('success', 'تم إضافة الفاتورة بنجاح');
         return redirect($this->toThisPage());
     }
 
@@ -347,5 +353,15 @@ class InvoicesController extends Controller
     public function export()
     {
         return \Excel::download(new InvoicesExport, 'Invoices.xlsx');
+    }
+    public function MarkAsRead_all (Request $request)
+    {
+        $userUnreadNotification= auth()->user()->unreadNotifications;
+        if($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+            return back();
+        }
+
+
     }
 }

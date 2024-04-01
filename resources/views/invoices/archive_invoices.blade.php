@@ -185,15 +185,14 @@
                                                     <i class="text-danger fas fa-trash-alt"></i>&nbsp;&nbsp;حذف
                                                     الفاتورة</a>
                                                  @endcan
-                                                 @can(' إلغاءارشفة الفاتورة')
+                                                 @can('ارشفة الفاتورة')
 
                                                 <a class="dropdown-item" href="#" data-invoice_id="{{ $invoice->id }}"
                                                    data-toggle="modal" data-target="#Transfer_invoice"><i
                                                         class="text-warning fa fa-exchange-alt"></i>&nbsp;&nbsp;إلغاء الأرشفة
                                                     </a>
                                                  @endcan
-                                            </div>
-                                        </div>
+
 
                                         @can('طباعةالفاتورة')
                                             <a class="dropdown-item" href="Print_invoice/{{ $invoice->id }}"><i
@@ -201,6 +200,8 @@
                                                 الفاتورة
                                             </a>
                                          @endcan
+                                </div>
+                            </div>
                     </div>
                 </div>
 

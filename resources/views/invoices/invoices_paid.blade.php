@@ -168,8 +168,7 @@
                                                     <i class=" text-success fas fa-money-bill"></i>&nbsp;&nbsp;تغير
                                                     حالة
                                                     الدفع</a>
-                                            </div>
-                                        </div>
+
 
 
                                         @can('ارشفة الفاتورة')
@@ -184,6 +183,8 @@
                                                     class="text-success fas fa-print"></i>&nbsp;&nbsp;طباعة
                                                 الفاتورة
                                             </a>
+                                            </div>
+                                        </div>
                         @endcan
                     </div>
                 </div>

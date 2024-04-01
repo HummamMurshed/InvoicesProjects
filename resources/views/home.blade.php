@@ -36,8 +36,23 @@
         </div>
     </div>
     <!-- /breadcrumb -->
+
 @endsection
 @section('content')
+    @php
+
+        function PrintInvoicesRate($status, $type)
+        {
+            $totalCount =   \App\Models\Invoices::count();
+            $subInvoicesCount =    \App\Models\Invoices::where($status,$type)->count();
+            if($subInvoicesCount != 0)
+            {
+                return round(($subInvoicesCount / $totalCount ) * 100);
+            }
+            return 0;
+
+        }
+    @endphp
     <!-- row -->
     <div class="row row-sm">
         <div class="col-xl-3 col-lg-6 col-md-6 col-xm-12">
@@ -52,6 +67,7 @@
                                 <h4 class="tx-20 font-weight-bold mb-1 text-white">
 
                                     {{number_format(\App\Models\Invoices::sum('total'),2)}}
+
 
                                 </h4>
 
@@ -87,6 +103,7 @@
                                     <strong> عدد الفواتير :</strong>
 
                                     {{\App\Models\Invoices::where('status','غير مدفوعة')->count()}}
+
                                 </p>
                             </div>
                             <span class="float-right my-auto mr-auto">
@@ -94,10 +111,8 @@
 
                                 <span class="text-white op-7">
                                     %
-                                    {{
-                                        (\App\Models\Invoices::where('status','غير مدفوعة')->count() /
-                                               \App\Models\Invoices::count()) * 100
-                                   }}
+
+                                    {{PrintInvoicesRate('status','غير مدفوعة')}}
 
                                 </span>
                             </span>
@@ -131,11 +146,8 @@
 
                                             <span class="text-white op-7">
                                                 %
-                                                {{
-                                                        (\App\Models\Invoices::where('status','مدفوعة')->count() /
-                                                               \App\Models\Invoices::count()) * 100
-                                               }}
 
+                                                {{PrintInvoicesRate('status','مدفوعة')}}
                                             </span>
 										</span>
                         </div>
@@ -167,10 +179,8 @@
                                 <i class="fas fa-arrow-circle-down text-white"></i>
                                 <span class="text-white op-7">
                                       %
-                                    {{
-                                        (\App\Models\Invoices::where('status','مدفوعة جزئيا')->count() /
-                                               \App\Models\Invoices::count()) * 100
-                                   }}
+
+                                    {{PrintInvoicesRate('status','مدفوعة جزئيا')}}
 
                                 </span>
                             </span>
